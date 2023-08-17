@@ -58,6 +58,19 @@ pipeline{
             }
         }
 
+        stage('Update Deployment Manifest') {
+
+            steps {
+
+                dir("CI-CD-PIPELINE") {
+                    sh 'BUILD_NUMBER=${BUILD_NUMBER}'
+                    sh 'sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml'
+
+                }
+            }
+
+        }  
+
         stage ('Updating the Deployment File') {
 
             environment {
@@ -79,10 +92,9 @@ pipeline{
                             git config  user.email "jtugume123@gmail.com"
                             git config  user.name "Achaz"
                             git remote set-url origin https://$GITHUB_TOKEN@github.com/Achaz/CI-CD-PIPELINE.git
-                            git checkout main
-                            BUILD_NUMBER=${BUILD_NUMBER}
-                            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml
+                            git checkout main     
                             git add -A
+                            BUILD_NUMBER=${BUILD_NUMBER}
                             git commit -m "updated the image ${BUILD_NUMBER}"
                             cat deployments.yaml
                             git push origin main                            
