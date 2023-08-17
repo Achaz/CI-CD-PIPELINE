@@ -95,7 +95,7 @@ pipeline{
                             git checkout main     
                             git add -A
                             BUILD_NUMBER=${BUILD_NUMBER}
-                            git commit -m "updated the image ${BUILD_NUMBER}"
+                            git commit -am "updated the image ${BUILD_NUMBER}" || true
                             cat deployments.yaml
                             git push origin main                            
                         
