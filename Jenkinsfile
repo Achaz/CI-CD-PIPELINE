@@ -64,7 +64,7 @@ pipeline{
 
                 dir("CI-CD-PIPELINE") {
                     sh 'BUILD_NUMBER=${BUILD_NUMBER}'
-                    sh 'sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml'
+                    sh 'sed -i "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" deployments.yml'
 
                 }
             }
