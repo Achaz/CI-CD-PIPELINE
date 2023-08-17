@@ -73,8 +73,8 @@ pipeline{
 
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
                     sh '''
-                        
-                        git clone https://github.com/Achaz/CI-CD-PIPELINE.git
+                        cd CI-CD-PIPELINE
+                        git pull https://github.com/Achaz/CI-CD-PIPELINE.git
                         git config  user.email "jtugume123@gmail.com"
                         git config  user.name "Achaz"
                         BUILD_NUMBER=${BUILD_NUMBER}
