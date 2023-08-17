@@ -70,13 +70,12 @@ pipeline{
                 
             }
 
-            steps {
-                sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
-            }
-
+            
             steps {
 
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
+
+                    sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
 
                     dir("CI-CD-PIPELINE"){
 
