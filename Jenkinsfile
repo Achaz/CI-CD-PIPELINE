@@ -66,7 +66,7 @@ pipeline{
             environment {
                 GIT_REPO_NAME = "CI-CD-PIPELINE"
                 GIT_USER_NAME = "Achaz"
-                GITHUB_TOKEN ="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"
+                
             }
 
             steps {
