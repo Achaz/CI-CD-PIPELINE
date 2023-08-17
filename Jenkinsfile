@@ -79,7 +79,7 @@ pipeline{
                         git config  user.name "Achaz"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml
-                        git add CI-CD-PIPELINE/deployments.yml
+                        git add deployments.yml
                         git commit -m "updated the image ${BUILD_NUMBER}"
                         git push @github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         
