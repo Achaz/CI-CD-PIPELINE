@@ -20,16 +20,12 @@ pipeline{
             
         }
 
-        stage("Cloning git"){
+        stage('Clone Gitops Repo Feature Branch') {
 
-            steps{
-
-                script {
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Achaz/CI-CD-PIPELINE.git']])
-                }
-
+            steps {
+                sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
             }
-                           
+
         }
 
         stage ('Building Image'){
@@ -82,10 +78,12 @@ pipeline{
                             git config  user.email "jtugume123@gmail.com"
                             git config  user.name "Achaz"
                             git remote set-url origin https://$GITHUB_TOKEN@github.com/Achaz/CI-CD-PIPELINE.git
+                            git checkout main
                             BUILD_NUMBER=${BUILD_NUMBER}
                             sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml
                             git add -A
                             git commit -m "updated the image ${BUILD_NUMBER}"
+                            cat deployments.yaml
                             git push origin main                            
                         
                         '''
