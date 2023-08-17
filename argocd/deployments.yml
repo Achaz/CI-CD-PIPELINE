@@ -17,7 +17,10 @@ spec:
         image: 735873741347.dkr.ecr.us-west-1.amazonaws.com/cicdpipeline:{{BUILD_NUMBER}}
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "128M"
+            memory: "2Gi"
+            cpu: "1000m"
+          requests:
+            memory: "500Mi"
+            cpu: "500m"
         ports:
         - containerPort: 3000
