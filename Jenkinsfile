@@ -66,14 +66,22 @@ pipeline{
             environment {
                 GIT_REPO_NAME = "CI-CD-PIPELINE"
                 GIT_USER_NAME = "Achaz"
+                GITHUB_TOKEN = credentials('GITHUB_TOKEN')
                 
+            }
+
+            steps {
+                sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
             }
 
             steps {
 
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
-                    sh '''
-                       
+
+                    dir("CI-CD-PIPELINE"){
+
+                        sh '''
+                        
                         git pull https://github.com/Achaz/CI-CD-PIPELINE.git
                         git config  user.email "jtugume123@gmail.com"
                         git config  user.name "Achaz"
@@ -81,10 +89,13 @@ pipeline{
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ./deployments.yml
                         git add .
                         git commit -m "updated the image ${BUILD_NUMBER}"
-                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                        git push https://$GITHUB_TOKEN@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                            
                         
-                       
-                    '''
+                        '''
+
+                    }
+                    
                 }
 
             }
