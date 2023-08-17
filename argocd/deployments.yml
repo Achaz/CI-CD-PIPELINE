@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-ci-cd-app
-        image: 735873741347.dkr.ecr.us-west-1.amazonaws.com/cicdpipeline:17
+        image: 735873741347.dkr.ecr.us-west-1.amazonaws.com/cicdpipeline:{{BUILD_NUMBER}}
         resources:
           limits:
             memory: "2Gi"
