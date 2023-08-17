@@ -92,11 +92,9 @@ pipeline{
                             git config  user.email "jtugume123@gmail.com"
                             git config  user.name "Achaz"
                             git remote set-url origin https://$GITHUB_TOKEN@github.com/Achaz/CI-CD-PIPELINE.git
-                            git checkout main     
                             git add -A
                             BUILD_NUMBER=${BUILD_NUMBER}
                             git commit -am "updated the image ${BUILD_NUMBER}" || true
-                            cat deployments.yaml
                             git push origin main                            
                         
                         '''
