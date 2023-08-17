@@ -20,9 +20,10 @@ pipeline{
             
         }
 
-        stage('Clone Gitops Repo Feature Branch') {
+        stage('Clone Gitops Repo Feature Branch') {          
 
             steps {
+                sh 'rm -R CI-CD-PIPELINE'
                 sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
             }
 
