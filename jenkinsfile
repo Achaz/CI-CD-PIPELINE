@@ -49,7 +49,7 @@ pipeline{
             steps {
 
                 script{
-
+                                        'https://735873741347.dkr.ecr.us-west-1.amazonaws.com/cicdpipeline'
                     docker.withRegistry('https://735873741347.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:aws-credentials') 
                     { 
 
@@ -66,11 +66,12 @@ pipeline{
             environment {
                 GIT_REPO_NAME = "CI-CD-PIPELINE"
                 GIT_USER_NAME = "Achaz"
+                GITHUB_TOKEN ="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"
             }
 
             steps {
 
-                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]){
+                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
                     sh '''
                     
                         git pull https://github.com/Achaz/CI-CD-PIPELINE.git
@@ -78,7 +79,7 @@ pipeline{
                         git config  user.name "Achaz"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" CI-CD-Project/deployments.yml
-                        git add ArgoCD/deployments.yml
+                        git add CI-CD-PIPELINE/deployments.yml
                         git commit -m "updated the image ${BUILD_NUMBER}"
                         git push @github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         
