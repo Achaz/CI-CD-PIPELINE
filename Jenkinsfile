@@ -73,6 +73,8 @@ pipeline{
 
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
                     sh '''
+                        rm -R CI-CD-PIPELINE
+                        git clone https://github.com/Achaz/CI-CD-PIPELINE.git
                         cd CI-CD-PIPELINE
                         git pull https://github.com/Achaz/CI-CD-PIPELINE.git
                         git config  user.email "jtugume123@gmail.com"
