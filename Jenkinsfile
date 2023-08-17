@@ -81,17 +81,17 @@ pipeline{
 
                     dir("CI-CD-PIPELINE"){
 
-                        sh '''
+                        sh '''                    
                         
-                        git pull https://github.com/Achaz/CI-CD-PIPELINE.git
-                        git config  user.email "jtugume123@gmail.com"
-                        git config  user.name "Achaz"
-                        BUILD_NUMBER=${BUILD_NUMBER}
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ./deployments.yml
-                        git add deployments.yml
-                        git commit -m "updated the image ${BUILD_NUMBER}"
-                        git push https://$GITHUB_TOKEN@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                            
+                            git config  user.email "jtugume123@gmail.com"
+                            git config  user.name "Achaz"
+                            git remote set-url origin https://$GITHUB_TOKEN@github.com/Achaz/CI-CD-PIPELINE.git
+                            git checkout main
+                            BUILD_NUMBER=${BUILD_NUMBER}
+                            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml
+                            git add -A
+                            git commit -m "updated the image ${BUILD_NUMBER}"
+                            git push origin main                            
                         
                         '''
 
