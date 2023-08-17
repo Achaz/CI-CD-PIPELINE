@@ -75,6 +75,8 @@ pipeline{
 
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
 
+                    sh 'rm -R CI-CD-PIPELINE'
+
                     sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
 
                     dir("CI-CD-PIPELINE"){
