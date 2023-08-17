@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-ci-cd-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-ci-cd-app
+  template:
+    metadata:
+      labels:
+        app: my-ci-cd-app
+    spec:
+      containers:
+      - name: my-ci-cd-app
+        image: 735873741347.dkr.ecr.us-west-1.amazonaws.com/cicdpipeline
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
