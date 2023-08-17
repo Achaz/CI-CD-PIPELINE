@@ -49,7 +49,7 @@ pipeline{
             steps {
 
                 script{
-                                        'https://735873741347.dkr.ecr.us-west-1.amazonaws.com/cicdpipeline'
+                                       
                     docker.withRegistry('https://735873741347.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:aws-credentials') 
                     { 
 
@@ -75,10 +75,6 @@ pipeline{
 
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
 
-                    sh 'rm -R CI-CD-PIPELINE'
-
-                    sh 'git clone -b main https://github.com/Achaz/CI-CD-PIPELINE.git'
-
                     dir("CI-CD-PIPELINE"){
 
                         sh '''                    
@@ -86,7 +82,6 @@ pipeline{
                             git config  user.email "jtugume123@gmail.com"
                             git config  user.name "Achaz"
                             git remote set-url origin https://$GITHUB_TOKEN@github.com/Achaz/CI-CD-PIPELINE.git
-                            git checkout main
                             BUILD_NUMBER=${BUILD_NUMBER}
                             sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployments.yml
                             git add -A
