@@ -2,7 +2,7 @@ FROM python:3.9.16-slim-buster
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+COPY required_versions.txt ./
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
